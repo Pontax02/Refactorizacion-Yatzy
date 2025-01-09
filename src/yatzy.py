@@ -21,40 +21,40 @@ class Yatzy:
     def yatzy(dice):
 
         return Yatzy.FIFTY if dice.count(dice[0])==Yatzy.FIVE else Yatzy.ZERO
+    
+    '''
+    cambiar el nombre de la variable score ya que hace confilcto con las built in de python, y eliminar codigo que no es apto para una ampliación futura
+    '''
 
     @staticmethod
-    def ones(first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
-        sum = 0
-        if (first_dice == 1):
-            sum += 1
-        if (second_dice == 1):
-            sum += 1
-        if (third_dice == 1):
-            sum += 1
-        if  (fourth_dice  == 1):
-            sum += 1
-        if (fifth_dice == 1):
-            sum += 1
+    def ones(dice):
 
-        return sum
+        score = 0
+        for results in dice:
+            if results == 1:
+                score += 1
+            else:
+                score += 0
+                
+        return score
 
     @staticmethod
-    def twos(first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
-        sum = 0
+    def twos(dice):
+        score = 0
         if (first_dice == 2):
-            sum += 2
+            score += 2
         if (second_dice == 2):
-            sum += 2
+            score += 2
         if (third_dice == 2):
-            sum += 2
+            score += 2
         if  (fourth_dice  == 2):
-            sum += 2
+            score += 2
         if (fifth_dice == 2):
-            sum += 2
-        return sum
+            score += 2
+        return score
 
     @staticmethod
-    def threes(first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
+    def threes(dice):
         s = 0
         if (first_dice == 3):
             s += 3
@@ -73,15 +73,15 @@ class Yatzy:
         self.dice[0] = first_dice
         self.dice[1] = second_dice
         self.dice[2] = third_dice
-        self.dice[3] = fourth_dice 
+        self.dice[3] = fourth_dice
         self.dice[4] = _5
 
     def fours(self):
-        sum = 0
+        score = 0
         for at in range(5):
             if (self.dice[at] == 4):
-                sum += 4
-        return sum
+                score += 4
+        return score
 
     def fives(self):
         s = 0
@@ -92,13 +92,13 @@ class Yatzy:
         return s
 
     def sixes(self):
-        sum = 0
+        score = 0
         for at in range(len(self.dice)):
             if (self.dice[at] == 6):
-                sum = sum + 6
-        return sum
+                score = score + 6
+        return score
 
-    def score_pair(self, first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
+    def score_pair(self, dice):
         counts = [0] * 6
         counts[first_dice - 1] += 1
         counts[second_dice - 1] += 1
@@ -112,7 +112,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def two_pair(first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
+    def two_pair(dice):
         counts = [0] * 6
         counts[first_dice - 1] += 1
         counts[second_dice - 1] += 1
@@ -145,7 +145,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def three_of_a_kind(first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
+    def three_of_a_kind(dice):
         t = [0] * 6
         t[first_dice - 1] += 1
         t[second_dice - 1] += 1
@@ -158,7 +158,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def smallStraight(first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
+    def smallStraight(dice):
         tallies = [0] * 6
         tallies[first_dice - 1] += 1
         tallies[second_dice - 1] += 1
@@ -174,7 +174,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def largeStraight(first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
+    def largeStraight(dice):
         tallies = [0] * 6
         tallies[first_dice - 1] += 1
         tallies[second_dice - 1] += 1
@@ -190,7 +190,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def fullHouse(first_dice, second_dice, third_dice, fourth_dice , fifth_dice):
+    def fullHouse(dice):
         tallies = []
         _2 = False
         i = 0
