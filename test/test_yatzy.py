@@ -1,4 +1,5 @@
-from yatzy1 import Yatzy
+from src.yatzy import Yatzy
+
 
 
 def test_chance_scores_sum_of_all_dice():
