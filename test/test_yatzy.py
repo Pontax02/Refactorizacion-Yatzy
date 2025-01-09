@@ -1,11 +1,9 @@
-from src.yatzy import Yatzy
+from src.yatzyyatzy import Yatzy
 
 
 
 def test_chance_scores_sum_of_all_dice():
-    expected = 15
-    actual = Yatzy.chance(2, 3, 4, 5, 1)
-    assert expected == actual
+    assert 15 == Yatzy.chance(2, 3, 4, 5, 1)
     assert 16 == Yatzy.chance(3, 3, 4, 5, 1)
 
 
