@@ -1,14 +1,11 @@
+from src.pips import Pips
+
 class Yatzy:
 
     FIFTY=50
     FIVE=5
     ZERO=0
-    ONE=1
-    TWO=2
-    THREE=3
-    FOUR=4
-    FIVE=5
-    SIX=6
+    
 
     '''
     Cambiamos el nombre de los argumentos de la funcion porque  no dejaban calro a que se referian,tambien el nombre de la variable que devuelve,
@@ -35,29 +32,15 @@ class Yatzy:
     @staticmethod
     def ones(*dice):
 
-        score = 0
-        for results in dice:
-            if results == 1:
-                score += 1
-            else:
-                score += 0
-                
-        return score
+        ONE = Pips.ONE.value
+        return dice.count(ONE) * ONE
+    
 
     @staticmethod
     def twos(*dice):
-        score = 0
-        if (dice == 2):
-            score += 2
-        if (second_dice == 2):
-            score += 2
-        if (third_dice == 2):
-            score += 2
-        if  (fourth_dice  == 2):
-            score += 2
-        if (fifth_dice == 2):
-            score += 2
-        return score
+        
+        TWO = Pips.TWO.value
+        return count
 
     @staticmethod
     def threes(dice):
