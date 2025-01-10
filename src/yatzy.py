@@ -40,24 +40,13 @@ class Yatzy:
     def twos(*dice):
         
         TWO = Pips.TWO.value
-        return count
+        return dice.count(TWO) * TWO
 
     @staticmethod
     def threes(dice):
-        s = 0
-        if (first_dice == 3):
-            s += 3
-        if (second_dice == 3):
-            s += 3
-        if (third_dice == 3):
-            s += 3
-        if  (fourth_dice  == 3):
-            s += 3
-        if (fifth_dice == 3):
-            s += 3
-        return s
+        THREE = Pips.THREE.value
+        return dice.count(THREE) * THREE
 
-    
 
     def fours(self):
         score = 0
