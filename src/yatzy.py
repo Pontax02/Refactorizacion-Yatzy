@@ -34,7 +34,6 @@ class Yatzy:
 
         ONE = Pips.ONE.value
         return dice.count(ONE) * ONE
-    
 
     @staticmethod
     def twos(*dice):
@@ -44,44 +43,34 @@ class Yatzy:
 
     @staticmethod
     def threes(dice):
+        
         THREE = Pips.THREE.value
         return dice.count(THREE) * THREE
 
+    @staticmethod
+    def fours(*dice):
 
-    def fours(self):
-        score = 0
-        for at in range(5):
-            if (self.dice[at] == 4):
-                score += 4
-        return score
+        FOUR = Pips.FOUR.value
+        return dice.count(FOUR) * FOUR
+    
+    @staticmethod
+    def fives(*dice):
 
-    def fives(self):
-        s = 0
-        i = 0
-        for i in range(len(self.dice)):
-            if (self.dice[i] == 5):
-                s = s + 5
-        return s
+        FIVE = Pips.FIVE.value
+        return dice.count(FIVE) * FIVE
+        
+    def sixes(*dice):
+        
+        SIX = Pips.SIX.value
+        return dice.count(SIX) * SIX
 
-    def sixes(self):
-        score = 0
-        for at in range(len(self.dice)):
-            if (self.dice[at] == 6):
-                score = score + 6
-        return score
+    def score_pair(*dice):
+        
+        return max(dice) * 2 if dice.count(max(dice)) == 2 else 0
+            
+            
 
-    def score_pair(self, dice):
-        counts = [0] * 6
-        counts[first_dice - 1] += 1
-        counts[second_dice - 1] += 1
-        counts[third_dice - 1] += 1
-        counts [fourth_dice  - 1] += 1
-        counts[fifth_dice - 1] += 1
-        at = 0
-        for at in range(6):
-            if (counts[6 - at - 1] == 2):
-                return (6 - at) * 2
-        return 0
+        
 
     @staticmethod
     def two_pair(dice):
