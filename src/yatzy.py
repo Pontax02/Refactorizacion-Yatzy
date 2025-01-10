@@ -3,22 +3,28 @@ class Yatzy:
     FIFTY=50
     FIVE=5
     ZERO=0
+    ONE=1
+    TWO=2
+    THREE=3
+    FOUR=4
+    FIVE=5
+    SIX=6
 
     '''
     Cambiamos el nombre de los argumentos de la funcion porque  no dejaban calro a que se referian,tambien el nombre de la variable que devuelve,
     y como el codigo repetia la misma accion por lo que lo convertimos a una linea,
     '''
     @staticmethod
-    def chance(first_dice, second_dice, third_dice, fourth_dice ,fifth_dice):
-        score = 0
-        score += (first_dice + second_dice + third_dice + fourth_dice +fifth_dice)
-        return score
+    def chance(*dice):
+
+        return sum(dice)
+    
 
     '''
     remodelamos la rutina a una mas entendible a primera vista y sustituimos las costantes por unas variables
     '''
     @staticmethod
-    def yatzy(dice):
+    def yatzy(*dice):
 
         return Yatzy.FIFTY if dice.count(dice[0])==Yatzy.FIVE else Yatzy.ZERO
     
@@ -27,7 +33,7 @@ class Yatzy:
     '''
 
     @staticmethod
-    def ones(dice):
+    def ones(*dice):
 
         score = 0
         for results in dice:
@@ -39,9 +45,9 @@ class Yatzy:
         return score
 
     @staticmethod
-    def twos(dice):
+    def twos(*dice):
         score = 0
-        if (first_dice == 2):
+        if (dice == 2):
             score += 2
         if (second_dice == 2):
             score += 2
@@ -68,13 +74,7 @@ class Yatzy:
             s += 3
         return s
 
-    def __init__(self, first_dice=0, second_dice=0, third_dice=0, fourth_dice =0, _5=0):
-        self.dice = [0] * 5
-        self.dice[0] = first_dice
-        self.dice[1] = second_dice
-        self.dice[2] = third_dice
-        self.dice[3] = fourth_dice
-        self.dice[4] = _5
+    
 
     def fours(self):
         score = 0
