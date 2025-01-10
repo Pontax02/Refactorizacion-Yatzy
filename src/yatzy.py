@@ -145,35 +145,22 @@ class Yatzy:
             return sum(dice)
         else:
             return 0
-            
+
+
+    '''
+    Reformulamos la logica para cubrir los casos posibles y que se entienda a simple vista,cambiamos la lógica a una mas sencilla que solo hiciera una cosa
+    '''
 
     @staticmethod
-    def fullHouse(dice):
-        tallies = []
-        _2 = False
-        i = 0
-        _2_at = 0
-        _3 = False
-        _3_at = 0
-
-        tallies = [0] * 6
-        tallies[first_dice - 1] += 1
-        tallies[second_dice - 1] += 1
-        tallies[third_dice - 1] += 1
-        tallies [fourth_dice  - 1] += 1
-        tallies[fifth_dice - 1] += 1
-
-        for i in range(6):
-            if (tallies[i] == 2):
-                _2 = True
-                _2_at = i + 1
-
-        for i in range(6):
-            if (tallies[i] == 3):
-                _3 = True
-                _3_at = i + 1
-
-        if (_2 and _3):
-            return _2_at * 2 + _3_at * 3
-        else:
-            return 0
+    def fullHouse(*dice):
+        
+        score = []
+        for pip in dice:
+            if dice.count(pip) == 3:
+                score.append(pip)
+            elif dice.count(pip) == 2:
+                score.append(pip)
+            else:
+                return 0
+        
+        return sum(score)
