@@ -1,219 +1,166 @@
+from src.pips import Pips
+
 class Yatzy:
 
-    @staticmethod
-    def chance(d1, d2, d3, d4, d5):
-        total = 0
-        total += d1
-        total += d2
-        total += d3
-        total += d4
-        total += d5
-        return total
+    FIFTY=50
+    FIVE=5
+    ZERO=0
+    
 
+    '''
+    Cambiamos el nombre de los argumentos de la funcion porque  no dejaban calro a que se referian,tambien el nombre de la variable que devuelve,
+    y como el codigo repetia la misma accion por lo que lo convertimos a una linea,
+    '''
     @staticmethod
-    def yatzy(dice):
-        counts = [0] * (len(dice) + 1)
-        for die in dice:
-            counts[die - 1] += 1
-        for i in range(len(counts)):
-            if counts[i] == 5:
-                return 50
-        return 0
+    def chance(*dice):
 
+        return sum(dice)
+    
+
+    '''
+    remodelamos la rutina a una mas entendible a primera vista y sustituimos las costantes por unas variables
+    '''
     @staticmethod
-    def ones(d1, d2, d3, d4, d5):
-        sum = 0
-        if (d1 == 1):
-            sum += 1
-        if (d2 == 1):
-            sum += 1
-        if (d3 == 1):
-            sum += 1
-        if (d4 == 1):
-            sum += 1
-        if (d5 == 1):
-            sum += 1
+    def yatzy(*dice):
 
-        return sum
+        return Yatzy.FIFTY if dice.count(dice[0])==Yatzy.FIVE else Yatzy.ZERO
+    
+    '''
+    cambiar el nombre de la variable score ya que hace confilcto con las built in de python, y eliminar codigo que no es apto para una ampliación futura
+    crear una clase aparte para gurdar los valores de los dados y refactorizar el metodo en las funciones desde ones hasta sixes para que sea mas entendible a primera vista
+    '''
 
     @staticmethod
-    def twos(d1, d2, d3, d4, d5):
-        sum = 0
-        if (d1 == 2):
-            sum += 2
-        if (d2 == 2):
-            sum += 2
-        if (d3 == 2):
-            sum += 2
-        if (d4 == 2):
-            sum += 2
-        if (d5 == 2):
-            sum += 2
-        return sum
+    def ones(*dice):
+
+        ONE = Pips.ONE.value
+        return dice.count(ONE) * ONE
 
     @staticmethod
-    def threes(d1, d2, d3, d4, d5):
-        s = 0
-        if (d1 == 3):
-            s += 3
-        if (d2 == 3):
-            s += 3
-        if (d3 == 3):
-            s += 3
-        if (d4 == 3):
-            s += 3
-        if (d5 == 3):
-            s += 3
-        return s
-
-    def __init__(self, d1=0, d2=0, d3=0, d4=0, _5=0):
-        self.dice = [0] * 5
-        self.dice[0] = d1
-        self.dice[1] = d2
-        self.dice[2] = d3
-        self.dice[3] = d4
-        self.dice[4] = _5
-
-    def fours(self):
-        sum = 0
-        for at in range(5):
-            if (self.dice[at] == 4):
-                sum += 4
-        return sum
-
-    def fives(self):
-        s = 0
-        i = 0
-        for i in range(len(self.dice)):
-            if (self.dice[i] == 5):
-                s = s + 5
-        return s
-
-    def sixes(self):
-        sum = 0
-        for at in range(len(self.dice)):
-            if (self.dice[at] == 6):
-                sum = sum + 6
-        return sum
-
-    def score_pair(self, d1, d2, d3, d4, d5):
-        counts = [0] * 6
-        counts[d1 - 1] += 1
-        counts[d2 - 1] += 1
-        counts[d3 - 1] += 1
-        counts[d4 - 1] += 1
-        counts[d5 - 1] += 1
-        at = 0
-        for at in range(6):
-            if (counts[6 - at - 1] == 2):
-                return (6 - at) * 2
-        return 0
+    def twos(*dice):
+        
+        TWO = Pips.TWO.value
+        return dice.count(TWO) * TWO
 
     @staticmethod
-    def two_pair(d1, d2, d3, d4, d5):
-        counts = [0] * 6
-        counts[d1 - 1] += 1
-        counts[d2 - 1] += 1
-        counts[d3 - 1] += 1
-        counts[d4 - 1] += 1
-        counts[d5 - 1] += 1
-        n = 0
-        score = 0
-        for i in range(6):
-            if (counts[6 - i - 1] >= 2):
-                n = n + 1
-                score += (6 - i)
+    def threes(*dice):
+        
+        THREE = Pips.THREE.value
+        return dice.count(THREE) * THREE
 
-        if (n == 2):
-            return score * 2
+    @staticmethod
+    def fours(*dice):
+
+        FOUR = Pips.FOUR.value
+        return dice.count(FOUR) * FOUR
+    
+    @staticmethod
+    def fives(*dice):
+
+        FIVE = Pips.FIVE.value
+        return dice.count(FIVE) * FIVE
+    
+    @staticmethod
+    def sixes(*dice):
+        
+        SIX = Pips.SIX.value
+        return dice.count(SIX) * SIX
+    
+    '''
+    reformular la logica de la funcion score_pair utilizando otro metodo mas practico y entendible
+    '''
+    @staticmethod
+    def score_pair(*dice):
+            
+            for pip in sorted(dice, reverse=True):
+                if dice.count(pip) >= 2:
+                    return pip * 2
+            return 0
+    
+    '''
+    eliminar los elementos de programacion orientada a objetos y sustituirlos por metodos estaticos de la propia funcion
+    '''
+
+    @staticmethod
+    def two_pair(*dice):
+        score = []
+        for pip in sorted(dice):
+            if dice.count(pip) >= 2:
+                score.append(pip)
+
+        if len(score) >= 4:
+            return sum(score[:4])
         else:
             return 0
 
-    @staticmethod
-    def four_of_a_kind(_1, _2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[_1 - 1] += 1
-        tallies[_2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        for i in range(6):
-            if (tallies[i] >= 4):
-                return (i + 1) * 4
-        return 0
+    '''
+    Reusamos la logica de la funcion score_pair para la funcion four_of_a_kind y eliminamos el codigo que no es necesario, ademas cambiamos el nombre i por pip para aclarar el proposito de la variable
+    '''
 
     @staticmethod
-    def three_of_a_kind(d1, d2, d3, d4, d5):
-        t = [0] * 6
-        t[d1 - 1] += 1
-        t[d2 - 1] += 1
-        t[d3 - 1] += 1
-        t[d4 - 1] += 1
-        t[d5 - 1] += 1
-        for i in range(6):
-            if (t[i] >= 3):
-                return (i + 1) * 3
-        return 0
+    def four_of_a_kind(*dice):
+
+        for pip in dice:
+            if dice.count(pip) >= 4:
+                return pip * 4
+            else:
+                return 0
+        
+        
+    '''
+    Usamos la misma lógica que con la anterior función pero en este caso con tres
+    '''
+    @staticmethod
+    def three_of_a_kind(*dice):
+        
+        for pip in dice:
+            if dice.count(pip) >= 3:
+                return pip * 3
+            else:
+                return 0
+        
+    '''
+    Sustituir la lógica usada por una mas practica y que cubre todos los casos posibles evitando que de error en caso de que reciba una escalera alta
+    '''
+
 
     @staticmethod
-    def smallStraight(d1, d2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        if (tallies[0] == 1 and
-                tallies[1] == 1 and
-                tallies[2] == 1 and
-                tallies[3] == 1 and
-                tallies[4] == 1):
-            return 15
-        return 0
-
-    @staticmethod
-    def largeStraight(d1, d2, d3, d4, d5):
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-        if (tallies[1] == 1 and
-                tallies[2] == 1 and
-                tallies[3] == 1 and
-                tallies[4] == 1
-                and tallies[5] == 1):
-            return 20
-        return 0
-
-    @staticmethod
-    def fullHouse(d1, d2, d3, d4, d5):
-        tallies = []
-        _2 = False
-        i = 0
-        _2_at = 0
-        _3 = False
-        _3_at = 0
-
-        tallies = [0] * 6
-        tallies[d1 - 1] += 1
-        tallies[d2 - 1] += 1
-        tallies[d3 - 1] += 1
-        tallies[d4 - 1] += 1
-        tallies[d5 - 1] += 1
-
-        for i in range(6):
-            if (tallies[i] == 2):
-                _2 = True
-                _2_at = i + 1
-
-        for i in range(6):
-            if (tallies[i] == 3):
-                _3 = True
-                _3_at = i + 1
-
-        if (_2 and _3):
-            return _2_at * 2 + _3_at * 3
+    def smallStraight(*dice):
+        
+        if len(set(dice)) == 5 and max(dice) == 5:
+            return sum(set(dice))
         else:
             return 0
+
+
+
+    '''
+    Reutilizamos la lógica de la funcion anterior y cambiiamos una condición para la escalera alta
+    '''
+
+    @staticmethod
+    def largeStraight(*dice):
+    
+        if len(set(dice)) == 5 and min(dice) == 2:
+            return sum(dice)
+        else:
+            return 0
+
+
+    '''
+    Reformulamos la logica para cubrir los casos posibles y que se entienda a simple vista,cambiamos la lógica a una mas sencilla que solo hiciera una cosa
+    '''
+
+    @staticmethod
+    def fullHouse(*dice):
+        
+        score = []
+        for pip in dice:
+            if dice.count(pip) == 3:
+                score.append(pip)
+            elif dice.count(pip) == 2:
+                score.append(pip)
+            else:
+                return 0
+        
+        return sum(score)
