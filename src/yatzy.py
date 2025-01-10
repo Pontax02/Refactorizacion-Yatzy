@@ -59,7 +59,7 @@ class Yatzy:
         FIVE = Pips.FIVE.value
         return dice.count(FIVE) * FIVE
     
-    @staticmethod    
+    @staticmethod
     def sixes(*dice):
         
         SIX = Pips.SIX.value
@@ -75,12 +75,16 @@ class Yatzy:
     
     @staticmethod
     def two_pair(*dice):
-        
-        total = 0
+        score = []
         for i in sorted(dice):
-            if sorted(dice).count(i) == 2:
-                total += i 
-        return total
+            if dice.count(i) >= 2:
+                score.append(i)
+
+        if len(score) >= 4:
+            return sum(score[:4])
+        else:
+            return 0
+
 
 
     @staticmethod
