@@ -119,22 +119,23 @@ class Yatzy:
             else:
                 return 0
         
+    '''
+    Sustituir la lógica usada por una mas practica y que cubre todos los casos posibles evitando que de error en caso de que reciba una escalera alta
+    '''
+
 
     @staticmethod
     def smallStraight(*dice):
-        tallies = [0] * 6
-        tallies[first_dice - 1] += 1
-        tallies[second_dice - 1] += 1
-        tallies[third_dice - 1] += 1
-        tallies [fourth_dice  - 1] += 1
-        tallies[fifth_dice - 1] += 1
-        if (tallies[0] == 1 and
-                tallies[1] == 1 and
-                tallies[2] == 1 and
-                tallies[3] == 1 and
-                tallies[4] == 1):
-            return 15
-        return 0
+        
+        if len(set(dice)) == 5 and max(dice) == 5:
+            return sum(set(dice))
+        else:
+            return 0
+
+
+
+
+
 
     @staticmethod
     def largeStraight(dice):
