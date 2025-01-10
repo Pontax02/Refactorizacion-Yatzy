@@ -27,6 +27,7 @@ class Yatzy:
     
     '''
     cambiar el nombre de la variable score ya que hace confilcto con las built in de python, y eliminar codigo que no es apto para una ampliación futura
+    crear una clase aparte para gurdar los valores de los dados y refactorizar el metodo en las funciones desde ones hasta sixes para que sea mas entendible a primera vista
     '''
 
     @staticmethod
@@ -65,40 +66,47 @@ class Yatzy:
         SIX = Pips.SIX.value
         return dice.count(SIX) * SIX
     
+    '''
+    reformular la logica de la funcion score_pair utilizando otro metodo mas practico y entendible
+    '''
     @staticmethod
     def score_pair(*dice):
             
-            for i in sorted(dice, reverse=True):
-                if dice.count(i) >= 2:
-                    return i * 2
+            for pip in sorted(dice, reverse=True):
+                if dice.count(pip) >= 2:
+                    return pip * 2
             return 0
     
+    '''
+    eliminar los elementos de programacion orientada a objetos y sustituirlos por metodos estaticos de la propia funcion
+    '''
+
     @staticmethod
     def two_pair(*dice):
         score = []
-        for i in sorted(dice):
-            if dice.count(i) >= 2:
-                score.append(i)
+        for pip in sorted(dice):
+            if dice.count(pip) >= 2:
+                score.append(pip)
 
         if len(score) >= 4:
             return sum(score[:4])
         else:
             return 0
 
-
+    '''
+    Reusamos la logica de la funcion score_pair para la funcion four_of_a_kind y eliminamos el codigo que no es necesario, ademas cambiamos el nombre i por pip para aclarar el proposito de la variable
+    '''
 
     @staticmethod
-    def four_of_a_kind(_1, _2, third_dice, fourth_dice , fifth_dice):
-        tallies = [0] * 6
-        tallies[_1 - 1] += 1
-        tallies[_2 - 1] += 1
-        tallies[third_dice - 1] += 1
-        tallies [fourth_dice  - 1] += 1
-        tallies[fifth_dice - 1] += 1
-        for i in range(6):
-            if (tallies[i] >= 4):
-                return (i + 1) * 4
-        return 0
+    def four_of_a_kind(*dice):
+
+        for pip in dice:
+            if dice.count(pip) >= 4:
+                return pip * 4
+            else:
+                return 0
+        
+        
 
     @staticmethod
     def three_of_a_kind(dice):
