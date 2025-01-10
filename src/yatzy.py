@@ -134,24 +134,18 @@ class Yatzy:
 
 
 
-
-
+    '''
+    Reutilizamos la lógica de la funcion anterior y cambiiamos una condición para la escalera alta
+    '''
 
     @staticmethod
-    def largeStraight(dice):
-        tallies = [0] * 6
-        tallies[first_dice - 1] += 1
-        tallies[second_dice - 1] += 1
-        tallies[third_dice - 1] += 1
-        tallies [fourth_dice  - 1] += 1
-        tallies[fifth_dice - 1] += 1
-        if (tallies[1] == 1 and
-                tallies[2] == 1 and
-                tallies[3] == 1 and
-                tallies[4] == 1
-                and tallies[5] == 1):
-            return 20
-        return 0
+    def largeStraight(*dice):
+    
+        if len(set(dice)) == 5 and min(dice) == 2:
+            return sum(dice)
+        else:
+            return 0
+            
 
     @staticmethod
     def fullHouse(dice):
