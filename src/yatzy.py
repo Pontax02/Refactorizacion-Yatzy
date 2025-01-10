@@ -107,22 +107,21 @@ class Yatzy:
                 return 0
         
         
+    '''
+    Usamos la misma lógica que con la anterior función pero en este caso con tres
+    '''
+    @staticmethod
+    def three_of_a_kind(*dice):
+        
+        for pip in dice:
+            if dice.count(pip) >= 3:
+                return pip * 3
+            else:
+                return 0
+        
 
     @staticmethod
-    def three_of_a_kind(dice):
-        t = [0] * 6
-        t[first_dice - 1] += 1
-        t[second_dice - 1] += 1
-        t[third_dice - 1] += 1
-        t [fourth_dice  - 1] += 1
-        t[fifth_dice - 1] += 1
-        for i in range(6):
-            if (t[i] >= 3):
-                return (i + 1) * 3
-        return 0
-
-    @staticmethod
-    def smallStraight(dice):
+    def smallStraight(*dice):
         tallies = [0] * 6
         tallies[first_dice - 1] += 1
         tallies[second_dice - 1] += 1
