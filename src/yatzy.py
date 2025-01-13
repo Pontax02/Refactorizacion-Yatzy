@@ -156,11 +156,11 @@ class Yatzy:
         
         score = []
         for pip in dice:
-            if dice.count(pip) == 3:
-                score.append(pip)
-            elif dice.count(pip) == 2:
+            if dice.count(pip) == 3 or dice.count(pip) == 2:
                 score.append(pip)
             else:
                 return 0
         
         return sum(score)
+    
+    

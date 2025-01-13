@@ -90,3 +90,4 @@ def test_fullHouse():
     assert 18 == Yatzy.fullHouse(6, 2, 2, 2, 6)
     assert 0 == Yatzy.fullHouse(2, 3, 4, 5, 6)
     assert 0 == Yatzy.fullHouse(6, 2, 2, 2, 3)
+    assert 16 == Yatzy.fullHouse(2, 2, 2, 5, 5)
