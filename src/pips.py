@@ -9,3 +9,15 @@ class Pips(Enum):
     FOUR = 4
     FIVE = 5
     SIX = 6
+
+    @classmethod
+    def values(cls):
+        return [number._value_ for number in Pips.__members__.values()]
+
+    @classmethod
+    def reversedValues(cls):
+        return reversed(cls.values())
+    
+    @classmethod
+    def minus(cls, pip):
+        return set(cls.values()) - { pip.value }
