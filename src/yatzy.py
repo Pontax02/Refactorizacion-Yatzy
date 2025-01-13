@@ -72,7 +72,7 @@ class Yatzy:
     @staticmethod
     def score_pair(*dice):
             
-            for pip in sorted(dice, reverse=True):
+            for pip in Pips.reversedValues():
                 if dice.count(pip) >= 2:
                     return pip * 2
             return 0
