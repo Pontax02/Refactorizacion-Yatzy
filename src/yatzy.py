@@ -23,7 +23,7 @@ class Yatzy:
     @staticmethod
     def yatzy(*dice):
 
-        return Yatzy.FIFTY if dice.count(dice[0])==Yatzy.FIVE else Yatzy.ZERO
+        return Yatzy.FIFTY if dice.count(dice[Yatzy.ZERO])==Yatzy.FIVE else Yatzy.ZERO
 
     '''
     cambiar el nombre de la variable score ya que hace confilcto con las built in de python, y eliminar codigo que no es apto para una ampliación futura
@@ -75,7 +75,7 @@ class Yatzy:
             for pip in Pips.reversedValues():
                 if dice.count(pip) >= 2:
                     return pip * 2
-            return 0
+            return Yatzy.ZERO
 
     '''
     eliminar los elementos de programacion orientada a objetos y sustituirlos por metodos estaticos de la propia funcion
@@ -91,7 +91,7 @@ class Yatzy:
         if len(score) >= 4:
             return sum(score[:4])
         else:
-            return 0
+            return Yatzy.ZERO
 
     '''
     Reusamos la logica de la funcion score_pair para la funcion four_of_a_kind y eliminamos el codigo que no es necesario, ademas cambiamos el nombre i por pip para aclarar el proposito de la variable
@@ -104,7 +104,7 @@ class Yatzy:
             if dice.count(pip) >= 4:
                 return pip * 4
             else:
-                return 0
+                return Yatzy.ZERO
 
 
     '''
@@ -117,7 +117,7 @@ class Yatzy:
             if dice.count(pip) >= 3:
                 return pip * 3
             else:
-                return 0
+                return Yatzy.ZERO
 
     '''
     Sustituir la lógica usada por una mas practica y que cubre todos los casos posibles evitando que de error en caso de que reciba una escalera alta
@@ -130,7 +130,7 @@ class Yatzy:
         if len(set(dice)) == 5 and max(dice) == 5:
             return sum(set(dice))
         else:
-            return 0
+            return Yatzy.ZERO
 
 
 
@@ -144,7 +144,7 @@ class Yatzy:
         if len(set(dice)) == 5 and min(dice) == 2:
             return sum(dice)
         else:
-            return 0
+            return Yatzy.ZERO
 
 
     '''
@@ -159,7 +159,7 @@ class Yatzy:
             if dice.count(pip) == 3 or dice.count(pip) == 2:
                 score.append(pip)
             else:
-                return 0
+                return Yatzy.ZERO
 
         return sum(score)
 
